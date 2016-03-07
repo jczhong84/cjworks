@@ -1,0 +1,65 @@
+body {
+  padding: 16px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #ededed;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.searchline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.searchbox {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    min-width: 0;
+    outline-width: 0;
+    border: solid 1px #c5c5c5;
+    border-radius: 2px;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.btn {
+    flex-basis: auto;
+    flex-shrink: 0;
+    padding: 8px;
+    background-color: #009688;
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    color: white;
+    margin-left: 8px;
+    font-size: 16px;
+}
+.word {
+    font-size: 36px;
+    color: #194885;
+    letter-spacing: 1px;
+    line-height: 43px;
+}
+
+.pron {
+    font-size: 20px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: 1.11px;
+    line-height: 23px;
+    margin-left: 32px;
+}
+
+.freq {
+    margin-left: 32px;
+}
+
+.sense {
+    margin-left:16px;
+}

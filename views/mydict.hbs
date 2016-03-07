@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel='stylesheet' href='/stylesheets/mydict.css' />
+        <script type="text/javascript" src="/javascripts/mydict.js"></script>
+
+    </head>
+    <body>
+        <div class='searchline'>
+            <input id='sb' class='searchbox' type='text' value='{{word}}' onkeypress="onKeyDown(event)" onFocus="this.select()" autofocus>
+            <button id='searchbtn' class='btn' onclick='queryWord()'>Search</button>
+        </div>
+        <div>
+              {{#if found}}
+            <div>
+                <span class='word'>{{data.word}}</span><span class='pron'>/{{data.pron}}/</span>
+                <span class='freq'>{{data.frequency}}</span>
+            </div>
+            <div>
+                {{#each data.entries}}
+                    <h2>{{mean}}</h2>
+                    {{#each definitions}}
+                        <h4>{{gram}}</h4>
+                        <p class='sense'>{{sense}}</p>
+                    {{/each}}
+                {{/each}}
+            </div>
+            {{else}}
+            <ul>
+                {{#each data}}
+                <li><a href='http://cjworks.cloudapp.net/dict/{{this}}' >{{this}}</a></li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </div>
+    </body>
+</html>
