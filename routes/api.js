@@ -1,4 +1,6 @@
 var express = require('express');
+var compress = require('compression');
+var session = require('express-session');    
 var router = express.Router();
 var collins = require('../libs/collins');
 var superagent = require('superagent');

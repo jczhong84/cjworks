@@ -23,33 +23,39 @@ module.exports = function (word, callback) {
 
                 return callback(404, suggestions);
             }
-
-            var word = $('.commonness div').attr('data-word');
+            var searchword = $('.breadcrumb.clear li').last().text();
             var frequency = $('.commonness div').attr('data-band');
 
-            var pron = null;
-            var forms = null;
             var entries = [];
             $('.homograph-entry').each(function(idx, element) {
                 var entry = {};
                 var $element = $(element);
-                if (!pron || !forms) {
-                    pron = $element.find('.pron').text().replace('(', '').replace(')', '').trim();
-                    forms = $element.find('.inflected_forms .infl').map(function(i, el){
-                        return $(el).text().trim();
-                    }).get().filter(function(el){
-                        return el != ","
-                    });
-                }
-;
+                entry.word = $element.find('.orth.h1_entry').contents().first().text();
+
+                entry.pron = $element.find('.pron').text().replace('(', '').replace(')', '').trim();
+                entry.forms = $element.find('.inflected_forms .infl').map(function(i, el){
+                    return $(el).text().trim();
+                }).get().filter(function(el){
+                    return el != ","
+                });
+                ;
                 entry.mean = $element.find('.orth.h1_entry .lbl.misc').text().replace('(', '').replace(')', '').trim();
                 var defines = [];
-                $element.find('.hom').each(function(idx, ele) {
+
+                var filter = '.definitions.hom-subsec .hom';
+                if (!$element.find(filter).length) {
+                    filter = '.definitions.hom-subsec';
+                }
+                $element.find(filter).each(function(idx, ele) {
                     $ele = $(ele);
                     if ($ele.find('.gramGrp').length) {
+                        var sense = [];
+                        $ele.find('.sense_list .sense_list_item').each(function(dix, item) {
+                            sense.push($(item).text().replace(/\s+/g, ' ').trim());
+                        });
                         defines.push({
-                            gram: $ele.find('.gramGrp').text().trim(),
-                            sense: $ele.find('.sense_list').text().replace(/\s+/g, ' ').trim()
+                            gram: $ele.find('.gramGrp.h3_entry').text().trim(),
+                            sense: sense
                         });
                     }
                 });
@@ -61,10 +67,8 @@ module.exports = function (word, callback) {
             });
 
             return callback(null, {
-                word: word,
-                frequency: frequency,
-                pron: pron,
-                forms: forms,
+                searchword: searchword,
+                freq: frequency,
                 entries: entries
             });
         });

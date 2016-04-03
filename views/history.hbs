@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel='stylesheet' href='/stylesheets/history.css' />
+
+    </head>
+    <body>
+        <div class='header'>
+            {{#if username}}
+            Welcome: {{username}}
+            {{/if}}
+            <a href='/dict'>Home</a>
+        </div>
+        <div class='main'>
+            <ul>
+                {{#each data}}
+                <li><a href='/dict/{{this.word}}' >{{this.word}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,5 +1,5 @@
 function queryWord() {
-    location.href = 'http://cjworks.cloudapp.net/dict/' + document.getElementById('sb').value;
+    location.href = '/dict/' + document.getElementById('sb').value;
 }
 
 function onKeyDown(e) {

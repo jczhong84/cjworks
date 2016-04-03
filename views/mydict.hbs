@@ -8,32 +8,60 @@
 
     </head>
     <body>
-        <div class='searchline'>
-            <input id='sb' class='searchbox' type='text' value='{{word}}' onkeypress="onKeyDown(event)" onFocus="this.select()" autofocus>
-            <button id='searchbtn' class='btn' onclick='queryWord()'>Search</button>
-        </div>
-        <div>
-              {{#if found}}
-            <div>
-                <span class='word'>{{data.word}}</span><span class='pron'>/{{data.pron}}/</span>
-                <span class='freq'>{{data.frequency}}</span>
+        <div class='main'>
+            <div class='header'>
+                <div class='user'>
+                    {{#if username}}
+                    Welcome: {{username}}
+                    {{else}}
+                    <a href='/login'>Login</a>
+                    {{/if}}
+                </div>
+                <div>
+                    <a href='/dict/history'>History</a>
+                </div>
+            </div>
+            <div class='searchline'>
+                <input id='sb' class='searchbox' type='text' value='{{data.searchword}}' onkeypress="onKeyDown(event)" onFocus="this.select()" autofocus>
+                <button id='searchbtn' class='btn' onclick='queryWord()'>Search</button>
             </div>
             <div>
-                {{#each data.entries}}
+                {{#if data.freq}}
+                <div>
+                    Word Frequency: <span class='freq'>{{data.freq}}</span>
+                </div>
+                {{/if}}
+                {{#if found}}
+                <div>
+                    {{#each data.entries}}
+                    <div class='wordline'>
+                        <span class='word'>{{word}}</span><span class='pron'>/{{pron}}/</span>
+                    </div>
+                    {{#if forms}}
+                    <div class='forms'>
+                        Word Forms:
+                        {{#each forms}}
+                            <span class='forms-item'>{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
                     <h2>{{mean}}</h2>
                     {{#each definitions}}
-                        <h4>{{gram}}</h4>
-                        <p class='sense'>{{sense}}</p>
+                    <h4>{{gram}}</h4>
+                    {{#each sense}}
+                    <p class='sense'>{{this}}</p>
                     {{/each}}
-                {{/each}}
+                    {{/each}}
+                    {{/each}}
+                </div>
+                {{else}}
+                <ul>
+                    {{#each data}}
+                    <li><a href='/dict/{{this}}' >{{this}}</a></li>
+                    {{/each}}
+                </ul>
+                {{/if}}
             </div>
-            {{else}}
-            <ul>
-                {{#each data}}
-                <li><a href='http://cjworks.cloudapp.net/dict/{{this}}' >{{this}}</a></li>
-                {{/each}}
-            </ul>
-            {{/if}}
         </div>
     </body>
 </html>
