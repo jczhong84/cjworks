@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script>
+      function appendResults(items) {
+        var results = document.getElementById('results');
+        items.forEach(function(item) {
+            var imgNode = document.createElement('img');
+            imgNode.src = item.image.thumbnailLink 
+            results.appendChild(imgNode);
+        });
+      }
+
+      function makeRequest() {
+        var request = gapi.client.search.cse.list({
+          'q': 'canyon',
+          'cx': '012708714541272471048:fniofwhf7ts',
+          'searchType': 'image'
+        });
+        request.then(function(response) {
+          appendResults(response.result.items);
+        }, function(reason) {
+          console.log('Error: ' + reason.result.error.message);
+        });
+      }
+
+      function init() {
+        gapi.client.setApiKey('AIzaSyDpgOCE1NrlNZRjxrvyb7NhHF8AwH-9cGg');
+        gapi.client.load('customsearch', 'v1').then(makeRequest);
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+  </head>
+  <body>
+    <div id="results"></div>
+  </body>
+</html>

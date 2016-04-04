@@ -46,9 +46,24 @@ module.exports = function (word, callback) {
                 if (!$element.find(filter).length) {
                     filter = '.definitions.hom-subsec';
                 }
+
+                var gramList = $element.find('.definitions.hom-subsec .gramGrp.h3_entry');
+                var senseList = $element.find('.definitions.hom-subsec .sense_list');
+                for (var i = 0; i < gramList.length; i++) {
+                    var gram = gramList.eq(i).text().trim();
+                    var sense = [];
+                    senseList.eq(i).find('.sense_list_item').each(function(dix, item) {
+                        sense.push($(item).text().replace(/\s+/g, ' ').trim());
+                    });
+                    defines.push({
+                        gram: gram,
+                        sense: sense
+                    });
+                }
+                /*
                 $element.find(filter).each(function(idx, ele) {
                     $ele = $(ele);
-                    if ($ele.find('.gramGrp').length) {
+                    if ($ele.find('.gramGrp.h3_entry').length) {
                         var sense = [];
                         $ele.find('.sense_list .sense_list_item').each(function(dix, item) {
                             sense.push($(item).text().replace(/\s+/g, ' ').trim());
@@ -60,6 +75,7 @@ module.exports = function (word, callback) {
                     }
                 });
 
+               */
                 if (defines.length > 0) {
                     entry.definitions = defines;
                     entries.push(entry);

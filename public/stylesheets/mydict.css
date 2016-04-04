@@ -59,6 +59,8 @@ a {
     font-size: 16px;
 }
 .wordline {
+    display: flex;
+    align-items: center;
     background-color: #cccccc;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -77,6 +79,7 @@ a {
     letter-spacing: 1.11px;
     line-height: 23px;
     margin-left: 32px;
+    margin-right: 32px;
 }
 
 .forms .forms-item {

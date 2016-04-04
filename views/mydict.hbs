@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel='stylesheet' href='/stylesheets/mydict.css' />
         <script type="text/javascript" src="/javascripts/mydict.js"></script>
-
+        <script src="https://apis.google.com/js/client.js?onload=init"></script>
     </head>
     <body>
         <div class='main'>
@@ -35,7 +35,7 @@
                 <div>
                     {{#each data.entries}}
                     <div class='wordline'>
-                        <span class='word'>{{word}}</span><span class='pron'>/{{pron}}/</span>
+                        <span class='word'>{{word}}</span><span class='pron'>/{{pron}}/</span><img src='/images/ic_speak.png' width="24" height="24" onclick="speak(event)"/>
                     </div>
                     {{#if forms}}
                     <div class='forms'>
@@ -63,5 +63,7 @@
                 {{/if}}
             </div>
         </div>
+
+        <div id="results"></div>
     </body>
 </html>
