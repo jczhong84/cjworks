@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');    
+var MongoStore = require('connect-mongo')(session);  
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
 var mongoose = require('mongoose');
@@ -47,7 +48,10 @@ app.use(cookieParser());
 app.use(session({                                                           
   resave: true,
   saveUninitialized: true,
-  secret: process.env.SESSION_SECRET
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+       mongooseConnection: mongoose.connection
+  })
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 

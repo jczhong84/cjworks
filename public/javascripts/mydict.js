@@ -46,11 +46,13 @@ function init() {
 }
 
 function speak(event) {
+    var wordNode = event.target.parentElement.getElementsByClassName('word');
+    var word = wordNode[0].innerText;
     if ('speechSynthesis' in window) {
         // Synthesis support. Make your web apps talk!
-        var wordNode = event.target.parentElement.getElementsByClassName('word');
-        var word = wordNode[0].innerText;
         var msg = new SpeechSynthesisUtterance(word);
         window.speechSynthesis.speak(msg);
+    } else {
+        new Audio('http://www.collinsdictionary.com/sounds/e/en_/en_us/en_us_' + word +'.mp3').play();
     }
 }
