@@ -12,6 +12,7 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
     req.session.username = req.body.username;
+    res.cookie('username', req.body.username, {maxAge : 9999});
 
     return res.redirect(req.session.returl ? req.session.returl : '/dict');
 });
