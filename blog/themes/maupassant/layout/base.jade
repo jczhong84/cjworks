@@ -28,6 +28,7 @@ html(lang='#{config.language}')
     link(rel='stylesheet', type='text/css', href='//cdn.bootcss.com/pure/0.6.0/pure-min.css')
     link(rel='stylesheet', type='text/css', href='//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css')
     link(rel='stylesheet', href='//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href=url_for(theme.css) + '/github-markdown.css' + '?v=' + theme.version)
     script(type='text/javascript', src='//cdn.bootcss.com/jquery/2.2.1/jquery.min.js')
     link(rel='Shortcut Icon', type='image/x-icon', href=url_for('favicon.ico'))
     link(rel='apple-touch-icon', href=url_for('apple-touch-icon.png'))
@@ -46,7 +47,7 @@ html(lang='#{config.language}')
           +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)
 
     #layout.pure-g
-      .pure-u-1.pure-u-md-3-4: .content_container
+      .pure-u-1.pure-u-md-3-4: .content_container.markdown-body
         block content
       .pure-u-1-4: #sidebar
         each item in theme.widgets

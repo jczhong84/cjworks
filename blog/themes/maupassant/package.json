@@ -6,6 +6,7 @@
     "version": "3.1.1"
   },
   "dependencies": {
+    "github-markdown-css": "^2.2.1",
     "hexo": "^3.0.0",
     "hexo-generator-archive": "^0.1.0",
     "hexo-generator-category": "^0.1.0",
